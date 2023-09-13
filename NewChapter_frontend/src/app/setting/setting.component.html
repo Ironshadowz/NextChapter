@@ -1,0 +1,43 @@
+<h2>Settings</h2>
+<nav>
+  <a routerLink="/main/{{name}}">Update Chapters</a>
+  <br>
+  <a routerLink='/watchlist/{{name}}'>Watch List</a>
+  <br>
+  <button (click)="logout()">Logout</button>
+</nav>
+<div>
+  <img [src]="this.setting.imageUrl">
+</div>
+<div>
+  <form [formGroup]="form">
+    <div>
+      <label>Font Size</label>
+      <br>
+      <input type="number" formControlName="frontSize">
+      <div *ngIf="form.get('frontSize')?.hasError('required')">
+        Please enter a font size
+      </div>
+      <div *ngIf="form.get('frontSize')?.hasError('min')">
+        Cannot be too small
+      </div>
+      <div *ngIf="form.get('frontSize')?.hasError('max')">
+        Cannot be too big
+      </div>
+    </div>
+    <div>
+      <label>Weather Effect</label>
+      <br>
+      <input type="text" formControlName="weatherEffect">
+      <div *ngIf="form.get('weatherEffect')?.hasError('required')">
+        Please set weather effect
+      </div>
+    </div>
+    <div>
+      Profile Picture: <input type="file" formControlName="myfile" #toupload>
+    </div>
+    <div>
+      <button (click)="save()" [disabled]="!form.valid">Save changes</button>
+    </div>
+  </form>
+</div>

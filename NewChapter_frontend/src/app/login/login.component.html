@@ -1,0 +1,27 @@
+<mat-label class="mat-h1">NextChapter</mat-label>
+<div>
+  <form [formGroup]="form" (submit)="submit()">
+    <div class="w-[556px] h-[343px] bg-zinc-300">
+      <label class="mat-subheading-1">Login</label>
+      <div class="w-[345px] h-[74px] flex-col justify-end items-start gap-[7px] inline-flex">
+        <div class="text-violet-900 text-sm font-normal leading-[19px]">Username</div>
+        <input matInput formControlName="username" >
+        <br>
+        <mat-error *ngIf="form.controls['username'].errors?.['required']">Name is a required field</mat-error>
+      </div>
+      <div class="w-[345px] h-[74px] flex-col justify-end items-start gap-[7px] inline-flex">
+        <div class="text-violet-900 text-sm font-normal leading-[19px]">Password</div>
+        <input matInput type="password" formControlName="password">
+        <br>
+        <mat-error *ngIf="form.controls['password'].errors?.['required']">Password required to login</mat-error>
+        <mat-error *ngIf="form.controls['password'].errors?.['minlength']">Password not long enough</mat-error>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Login</button>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" type="button" (click)="create()">Register</button>
+      </div>
+    </div>
+  </form>
+</div>

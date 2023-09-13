@@ -1,0 +1,21 @@
+<h2>Watch List of Novels</h2>
+<nav>
+  <a routerLink="/main/{{name}}">All Chapters</a>
+  <br>
+  <a routerLink='/settings/{{name}}'>Settings</a>
+</nav>
+<div>
+  <table>
+    <tbody>
+      <tr *ngFor="let novel of novels">
+        <td>
+          <img [src]="novel.image">
+          {{novel.title}}
+        </td>
+        <td>
+          <button (click)="delete(novel.title)">Remove novel from watch list</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
