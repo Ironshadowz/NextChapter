@@ -1,20 +1,16 @@
 package MiniProject.NextChapter_back.Controller;
 
-import java.net.URI;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import MiniProject.NextChapter_back.Config.UserAuthProvider;
 import MiniProject.NextChapter_back.Model.User;
 import MiniProject.NextChapter_back.Model.UserDto;
-import MiniProject.NextChapter_back.Records.ErrorDto;
 import MiniProject.NextChapter_back.Records.LoginDto;
 import MiniProject.NextChapter_back.Records.SignUpDto;
 import MiniProject.NextChapter_back.Service.UserService;

@@ -1,10 +1,18 @@
-<mat-label class="mat-h1">Updates</mat-label>
+
+<div class="container2">
+  <mat-label class="mat-h1" style="font-size:40px">NextChapter</mat-label>
+</div>
 <style>
   img.icon {
             display:inline;
             width: 50px; /* Set the width to the desired icon width */
             height: 50px; /* Set the height to the desired icon height */
-        }
+            margin-right: 12px;
+          }
+        .image-style {
+            width: 300px; /* Set the width of the image */
+            height: 400px; /* Set the height of the image */
+          }
   /* Style for the navigation bar */
         /* Style for the navigation bar */
         .container {
@@ -13,7 +21,14 @@
             border: 1px solid #ccc; /* Add a border for illustration */
             padding: 10px;
             overflow: auto;
-        }
+          }
+          .container2 {
+            text-align: center; /* Center-align the content */
+            background-color: #dddeeb;
+            border: 1px solid #ccc; /* Add a border for illustration */
+            padding: 10px;
+            overflow: auto;
+          }
         ul.navbar {
             list-style-type: none;
             margin: 0;
@@ -22,54 +37,57 @@
             background-color: black;
             overflow: hidden;
             display: inline-block; /* Display the ul horizontally */
-        }
-
+          }
         /* Style for the navigation bar items (list items) */
         ul.navbar li {
             border: 1px solid black;
             display: inline; /* Display list items inline within the ul */
             margin-right: 10px; /* Add spacing between list items */
-        }
-
+          }
         ul.navbar li a {
             color: white;
             text-decoration: none;
-        }
+          }
         ul.navbar li button {
           color: grey;
             text-decoration: none;
-        }
+          }
         /* Style for the navigation bar items on hover */
         ul.navbar li a:hover {
             background-color: #555;
-        }
+          }
         table.center {
             margin: 0 auto; /* Set margin to auto for horizontal centering */
-        }
+          }
         .center-horizontally {
             margin: 0 auto; /* Set margin to auto for horizontal centering */
             text-align: center; /* Optional: Center-align the content within the div */
-        }
+          }
+        a {
+             font-size: 20px; /* Adjust the font size to your desired value */
+          }
+          .horizontal-list {
+            list-style: none; /* Remove the default list-style (bullets/numbers) */
+            padding: 0; /* Remove any default padding */
+            margin: 0; /* Remove any default margin */
+            display: flex; /* Use flexbox to create a horizontal layout */
+          }
+          .horizontal-list li {
+            margin-right: 10px; /* Add space between list items (adjust as needed) */
+            /* Additional styling for list items */
+          }
+
 </style>
 <div class="container">
   <img class="icon" [src]="setting.imageUrl">
-  <mat-label class="mat-h2">Welcome <span>{{name | titlecase}}</span>, the weather is <span>{{setting.weather}} today</span></mat-label>
+  <mat-label class="mat-h2">Welcome <span>{{name | titlecase}}</span></mat-label>
   <br>
-  <mat-list>
-    <mat-list-item> <mat-icon>view_list</mat-icon><a routerLink="/watchlist/{{name}}">Watch List</a></mat-list-item>
-    <mat-list-item><mat-icon>settings</mat-icon><a routerLink='/settings/{{name}}'>Setting</a></mat-list-item>
-    <mat-list-item><mat-icon>exit_to_app</mat-icon><button mat-raised-button color="primary" (click)="logout()">Logout</button></mat-list-item>
+  <mat-label class="mat-h3">The weather is <span>{{setting.weather}} today</span></mat-label>
+  <mat-list class="horizontal-list">
+    <mat-list-item><a routerLink="/watchlist/{{name}}"><mat-icon>view_list</mat-icon>Watch List</a></mat-list-item>
+    <mat-list-item><a routerLink='/settings/{{name}}'><mat-icon>settings</mat-icon>Setting</a></mat-list-item>
+    <mat-list-item><button mat-raised-button color="primary" (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button></mat-list-item>
   </mat-list>
-</div>
-<!-- <nav>
-  <a routerLink="/watchlist/{{name}}">Watch List</a>
-  <br>
-  <a routerLink='/settings/{{name}}'>Settings</a>
-  <br>
-  <button (click)="logout()">Logout</button>
-</nav> -->
-<body style="background-color: #f0f0f0;">
-<br>
   <div class="center-horizontally">
     <div *ngIf="addchapter">
     <div>
@@ -82,21 +100,22 @@
       <p>{{added | titlecase}}</p>
     </div>
     <div>
-      <mat-icon>playlist_add</mat-icon><button (click)="addnewchapter()">Add</button>
+      <button (click)="addnewchapter()"><mat-icon>playlist_add</mat-icon>Add</button>
     </div>
     </div>
     <div *ngIf="!addchapter">
-      <mat-icon>playlist_add</mat-icon><button mat-raised-button color="primary" (click)="add()">Add Chapter</button>
+      <button mat-raised-button color="primary" (click)="add()"><mat-icon>playlist_add</mat-icon>Add Chapter</button>
     </div>
   </div>
+</div>
+<body style="background-color: #f0f0f0;">
+<br>
   <div>
-
-
     <!-- Add a paginator for pagination (optional) -->
     <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons></mat-paginator> -->
     <table class="center">
       <thead>
-        <tr>Updated Chapters</tr>
+        <tr><h1 style="text-align:center">Updated Chapters</h1></tr>
       </thead>
       <tbody>
         <tr *ngFor="let novel of updates; let i=index">
@@ -104,7 +123,7 @@
           <td>
             <a (click)="updatechapter(novel.url, novel.title)" href="">{{novel.title}}</a>
             <br>
-            <a (click)="updatechapter(novel.url, novel.title)"><img [src]="novel.image"></a>
+            <a (click)="updatechapter(novel.url, novel.title)"><img [src]="novel.image" class="image-style"></a>
           </td>
           </tr>
       </tbody>

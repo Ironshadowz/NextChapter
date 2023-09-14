@@ -83,6 +83,7 @@ export class MainComponent
                     if(result==true)
                     {
                       console.log('Chapter added')
+                      alert('Chapter added')
                       this.ngOnInit()
                       this.added=''
                     }

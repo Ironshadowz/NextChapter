@@ -1,9 +1,6 @@
 package MiniProject.NextChapter_back.Service;
 
 import java.io.IOException;
-import java.io.StringReader;
-import java.net.URL;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import MiniProject.NextChapter_back.Model.AddChapter;
-import MiniProject.NextChapter_back.Model.User;
 import MiniProject.NextChapter_back.Model.Watchlist;
 import MiniProject.NextChapter_back.Repository.SQLRepository;
-import MiniProject.NextChapter_back.Repository.UserRepository;
-import jakarta.json.Json;
-import jakarta.json.JsonObject;
-import jakarta.json.JsonReader;
+
 
 @Service
 public class MainService 
@@ -26,10 +19,6 @@ public class MainService
     private SQLRepository sqlRepo;
     @Autowired
     private LinkService linkServ;
-    @Autowired
-    private Utility jServ;
-    @Autowired
-    private UserRepository userRepo;
 
     public List<AddChapter> getNextChapter(String username) throws IOException
     {

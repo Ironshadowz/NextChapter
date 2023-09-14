@@ -1,27 +1,54 @@
-<mat-label class="mat-h1">NextChapter</mat-label>
-<div>
-  <form [formGroup]="form" (submit)="submit()">
-    <div class="w-[556px] h-[343px] bg-zinc-300">
-      <label class="mat-subheading-1">Login</label>
-      <div class="w-[345px] h-[74px] flex-col justify-end items-start gap-[7px] inline-flex">
-        <div class="text-violet-900 text-sm font-normal leading-[19px]">Username</div>
-        <input matInput formControlName="username" >
+<div class="container2">
+  <mat-label class="mat-h1" style="font-size:40px">NextChapter</mat-label>
+</div>
+<style>
+  .container {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  background-color: #8e95e3;
+  border: 1px solid #ccc; /* Add a border for illustration */
+  height: 100vh; /* Make the container fill the viewport height */
+}
+.container2 {
+            text-align: center; /* Center-align the content */
+            background-color: #dddeeb;
+            border: 1px solid #ccc; /* Add a border for illustration */
+            padding: 10px;
+            overflow: auto;
+          }
+.left-div, .right-div {
+  width: 50%; /* Set both divs to occupy 50% of the container width */
+  float: left; /* Float the divs left to make them side by side */
+  /* Optionally, you can add styles to the divs */
+}
+</style>
+<div class="container">
+  <div>
+    <form [formGroup]="form" (submit)="submit()">
+      <div class="w-[556px] h-[343px] bg-zinc-300">
+        <label class="mat-subheading-1" style="font-size:30px">Login</label>
         <br>
-        <mat-error *ngIf="form.controls['username'].errors?.['required']">Name is a required field</mat-error>
+        <div>
+          <div style="font-size:20px">Username</div>
+          <input matInput formControlName="username" placeholder="Enter">
+          <br>
+          <mat-error *ngIf="form.controls['username'].errors?.['required']">Name is a required field</mat-error>
+        </div>
+        <div class="w-[345px] h-[74px] flex-col justify-end items-start gap-[7px] inline-flex">
+          <div style="font-size:20px">Password</div>
+          <input matInput type="password" formControlName="password" placeholder="Enter">
+          <br>
+          <mat-error *ngIf="form.controls['password'].errors?.['required']">Password required to login</mat-error>
+          <mat-error *ngIf="form.controls['password'].errors?.['minlength']">Password not long enough</mat-error>
+        </div>
+        <div class="left-div">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid"><mat-icon>arrow_forward</mat-icon>Login</button>
+        </div>
+        <div class="right-div">
+          <button mat-raised-button color="primary" type="button" (click)="create()"><mat-icon>subscriptions</mat-icon>Register</button>
+        </div>
       </div>
-      <div class="w-[345px] h-[74px] flex-col justify-end items-start gap-[7px] inline-flex">
-        <div class="text-violet-900 text-sm font-normal leading-[19px]">Password</div>
-        <input matInput type="password" formControlName="password">
-        <br>
-        <mat-error *ngIf="form.controls['password'].errors?.['required']">Password required to login</mat-error>
-        <mat-error *ngIf="form.controls['password'].errors?.['minlength']">Password not long enough</mat-error>
-      </div>
-      <div>
-        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Login</button>
-      </div>
-      <div>
-        <button mat-raised-button color="primary" type="button" (click)="create()">Register</button>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

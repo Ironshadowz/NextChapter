@@ -1,20 +1,61 @@
-<h2>Settings</h2>
-<nav>
-  <a routerLink="/main/{{name}}">Update Chapters</a>
-  <br>
-  <a routerLink='/watchlist/{{name}}'>Watch List</a>
-  <br>
-  <button (click)="logout()">Logout</button>
-</nav>
-<div>
-  <img [src]="this.setting.imageUrl">
+<div class="container2">
+  <mat-label class="mat-h1" style="font-size:40px"><a routerLink="/main/{{name}}">NextChapter</a></mat-label>
 </div>
-<div>
+<style>
+  .container {
+            text-align: center; /* Center-align the content */
+            background-color: #8e95e3;
+            border: 1px solid #ccc; /* Add a border for illustration */
+            padding: 10px;
+            overflow: auto;
+          }
+          .container2 {
+            text-align: center; /* Center-align the content */
+            background-color: #dddeeb;
+            border: 1px solid #ccc; /* Add a border for illustration */
+            padding: 10px;
+            overflow: auto;
+          }
+          .center-horizontally {
+            margin: 0 auto; /* Set margin to auto for horizontal centering */
+            text-align: center; /* Optional: Center-align the content within the div */
+          }
+          img.icon {
+            display:inline;
+            width: 50px; /* Set the width to the desired icon width */
+            height: 50px; /* Set the height to the desired icon height */
+            margin-right: 12px;
+          }
+          .horizontal-list {
+            list-style: none; /* Remove the default list-style (bullets/numbers) */
+            padding: 0; /* Remove any default padding */
+            margin: 0; /* Remove any default margin */
+            display: flex; /* Use flexbox to create a horizontal layout */
+          }
+          .horizontal-list li {
+            margin-right: 10px; /* Add space between list items (adjust as needed) */
+            /* Additional styling for list items */
+          }
+          .bigger-input {
+            width: 300px; /* Set the desired width in pixels */
+            height: 40px; /* Set the desired height in pixels */
+            font-size: 16px; /* Set the desired font size in pixels */
+          }
+</style>
+<div class="container">
+  <img [src]="this.setting.imageUrl" class="icon">
+  <mat-label class="mat-h2">Welcome <span>{{name | titlecase}}</span></mat-label>
+  <br>
+  <mat-list class="horizontal-list">
+    <mat-list-item><a routerLink="/main/{{name}}"><mat-icon>star_border</mat-icon>Updates</a></mat-list-item>
+    <mat-list-item><a routerLink='/watchlist/{{name}}'><mat-icon>view_list</mat-icon>Watch List</a></mat-list-item>
+    <mat-list-item><button mat-raised-button color="primary" (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button></mat-list-item>
+  </mat-list>
   <form [formGroup]="form">
     <div>
-      <label>Font Size</label>
+      <mat-label style="font-size:20px">Font Size</mat-label>
       <br>
-      <input type="number" formControlName="frontSize">
+      <input matInput type="number" formControlName="frontSize" placeholder="14-40">
       <div *ngIf="form.get('frontSize')?.hasError('required')">
         Please enter a font size
       </div>
@@ -26,18 +67,22 @@
       </div>
     </div>
     <div>
-      <label>Weather Effect</label>
+      <mat-label style="font-size:20px">Weather Effect</mat-label>
       <br>
-      <input type="text" formControlName="weatherEffect">
+      <input matInput type="text" formControlName="weatherEffect" placeholder="True or False">
       <div *ngIf="form.get('weatherEffect')?.hasError('required')">
         Please set weather effect
       </div>
     </div>
+    <br>
     <div>
-      Profile Picture: <input type="file" formControlName="myfile" #toupload>
+      <mat-label style="font-size:20px">Profile Picture:</mat-label>
+      <br>
+      <input type="file" formControlName="myfile" #toupload class="bigger-input">
     </div>
+    <br>
     <div>
-      <button (click)="save()" [disabled]="!form.valid">Save changes</button>
+      <button mat-raised-button color="primary" (click)="save()" [disabled]="!form.valid">Save changes</button>
     </div>
   </form>
 </div>

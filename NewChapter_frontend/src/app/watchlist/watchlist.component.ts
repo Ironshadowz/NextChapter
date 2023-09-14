@@ -3,6 +3,7 @@ import { BackendService } from '../backend.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Novel } from '../user';
+import { HttpService } from '../http.service';
 
 @Component
 ({
@@ -16,11 +17,12 @@ export class WatchlistComponent
   sub!:Subscription
   novels!:Novel[]
   errorMsg!:string
-  sub2!:Subscription
+  sub2:Subscription = Subscription.EMPTY
 
   private backServ = inject(BackendService)
   private route = inject(ActivatedRoute)
   private router = inject(Router)
+  private auth = inject(HttpService)
 
   ngOnInit()
   {
@@ -48,6 +50,11 @@ export class WatchlistComponent
                     }
                   }
                 )
+  }
+  logout()
+  {
+    this.auth.setAuthToken(null);
+    this.router.navigate(['/']);
   }
   ngOnDestroy()
   {

@@ -1,12 +1,12 @@
 package MiniProject.NextChapter_back.Service;
 
 import java.nio.CharBuffer;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import MiniProject.NextChapter_back.Exceptions.AppException;
@@ -45,7 +45,7 @@ public class UserService
         } else
         throw new AppException("Invalid password", HttpStatus.BAD_REQUEST);
     }
-
+    @Transactional
     public User register(SignUpDto signUpDto) 
     {
         User optionalUser = userRepository.getUserByName(signUpDto.username());

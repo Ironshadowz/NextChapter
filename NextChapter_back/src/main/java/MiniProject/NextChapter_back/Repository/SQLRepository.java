@@ -1,11 +1,9 @@
 package MiniProject.NextChapter_back.Repository;
 
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
 
