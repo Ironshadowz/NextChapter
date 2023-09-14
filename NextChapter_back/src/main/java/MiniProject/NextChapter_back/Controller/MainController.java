@@ -86,15 +86,15 @@ public class MainController
     }
     @PutMapping(path="/setting/{username}")
     public ResponseEntity<Boolean> updateSetting(@PathVariable("username") String username, 
-                            @RequestPart String frontSize, @RequestPart String weatherEffect, @RequestPart MultipartFile myfile)
+                    @RequestPart String frontSize, @RequestPart String weatherEffect, @RequestPart(required = false) MultipartFile myfile)
     {
         Setting setting = new Setting();
         setting.setFrontsize(Integer.parseInt(frontSize));
         setting.setWeatherEffect(Boolean.parseBoolean(weatherEffect));
         setting.setName(username);
         System.out.println("maincontroller updatesetting setting: "+setting);
-        Boolean updated = userServ.updateUserSetting(setting, myfile);
-        return ResponseEntity.ok(updated);
+        boolean result = userServ.updateUserSetting(setting, myfile);
+        return ResponseEntity.ok(result);
     }
     @GetMapping(path="/weather")
     public ResponseEntity<String> getWeather(@RequestParam(required=false) String name)

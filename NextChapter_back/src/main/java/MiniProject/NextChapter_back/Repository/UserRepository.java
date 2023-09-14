@@ -50,7 +50,7 @@ public class UserRepository
     }
     public void defaultSetting(String username)
     {
-        template.update(DEFAULT_SETTING, username, 24, true);
+        template.update(DEFAULT_SETTING, username, 24, false);
     }
     public Boolean updateSetting(Setting setting)
     {

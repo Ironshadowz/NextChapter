@@ -31,7 +31,7 @@ public class WeatherService
                 .queryParam("q", city)
                 .queryParam("units", "metric")
                 .toUriString();
-        
+        System.out.println(url);
         // why need <Void> ?? 
         // using the resttemplate to call the api
         System.out.println(city);
@@ -48,15 +48,15 @@ public class WeatherService
 
         // building the jsonobject of properties that we want selectively 
         JsonObject weatherObj = Json.createObjectBuilder()
-                                .add("description", weather.getJsonObject(0).getString("description"))
+                                .add("main", weather.getJsonObject(0).getString("main"))
                                 .add("temperature", main.getJsonNumber("temp"))
                                 .add("humidity", main.getJsonNumber("humidity"))
                                 .add("wind_speed", wind.getJsonNumber("speed"))
                                 .add("wind_degree", wind.getJsonNumber("deg"))
                                 .build();
 
-        System.out.println(weatherObj.getString("description"));
-        return weatherObj.getString("description");
+        System.out.println(weatherObj.getString("main"));
+        return weatherObj.getString("main");
     }
 
    

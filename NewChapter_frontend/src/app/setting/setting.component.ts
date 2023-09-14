@@ -20,9 +20,9 @@ export class SettingComponent
   form!:FormGroup
   sub:Subscription = Subscription.EMPTY
   sub2:Subscription = Subscription.EMPTY
-  sub3?:Subscription
+  sub3:Subscription = Subscription.EMPTY
   name!:string
-  setting!:Setting // = { name:'', frontSize : 24, weatherEffect : true, weather : 'something'}
+  setting:Setting  = { name:'', frontsize : 24, weatherEffect : false, imageUrl:'' , weather : ''}
   errorMsg!:string
   formData = new FormData()
   weather!:string
@@ -47,7 +47,6 @@ export class SettingComponent
                   next: (result)=>
                   {
                     this.setting=result
-                    document.body.style.fontSize = this.setting.frontsize + 'px';
                     console.log("Getting result "+this.setting.frontsize)
                     if(result!=null)
                     {
@@ -73,14 +72,16 @@ export class SettingComponent
     //this.setting = this.form.value
     //console.log("save setting "+this.setting.frontSize)
     this.sub2 = this.auth.request('PUT', '/setting/'+this.name, formdata).subscribe
-   // this.sub2 = this.servicer.updateSetting(this.name, formdata).subscribe
+    //this.sub2 = this.servicer.updateSetting(this.name, formdata).subscribe
                 ({
                     next: (result)=>
                     {
                       if(result==true)
                         {
                           this.ngOnInit()
-                          this.formData.delete
+                          alert('Setting updated')
+                        } else
+                        {
                           alert('Setting updated')
                         }
                     },
@@ -97,13 +98,12 @@ export class SettingComponent
     this.formData.set('weatherEffect', this.form.value['weatherEffect'])
     //this.formData.set('myfile', this.toupload.nativeElement[0])
     //Access the file input element and its files property
-    const files = this.toupload.nativeElement.files;
-
+    const files = this.toupload.nativeElement.files
      if (files && files.length > 0)
      {
         this.formData.set('myfile', files[0]);
      }
-    this.onSubmit(this.formData)
+      this.onSubmit(this.formData)
   }
   logout()
   {
@@ -114,6 +114,6 @@ export class SettingComponent
   {
     this.sub.unsubscribe()
     this.sub2.unsubscribe()
-    this.sub3?.unsubscribe()
+    this.sub3.unsubscribe()
   }
 }

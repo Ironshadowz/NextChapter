@@ -79,29 +79,38 @@
 
 </style>
 <div class="container">
-  <img class="icon" [src]="setting.imageUrl">
+  <div *ngIf="setting.imageUrl">
+    <img class="icon" [src]="setting.imageUrl" alt="">
+  </div>
+  <div *ngIf="!setting.imageUrl">
+    <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Fantasy_icon.svg">
+  </div>
   <mat-label class="mat-h2">Welcome <span>{{name | titlecase}}</span></mat-label>
   <br>
-  <mat-label class="mat-h3">The weather is <span>{{setting.weather}} today</span></mat-label>
+  <div *ngIf="setting.weather">
+    <mat-label class="mat-h3">The weather is <span>{{setting.weather}} today</span></mat-label>
+  </div>
   <mat-list class="horizontal-list">
     <mat-list-item><a routerLink="/watchlist/{{name}}"><mat-icon>view_list</mat-icon>Watch List</a></mat-list-item>
     <mat-list-item><a routerLink='/settings/{{name}}'><mat-icon>settings</mat-icon>Setting</a></mat-list-item>
     <mat-list-item><button mat-raised-button color="primary" (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button></mat-list-item>
   </mat-list>
   <div class="center-horizontally">
+    <mat-label>Supports chapters from <a href="https://shanghaifantasy.com/" target="_blank">shanghaifantasy</a></mat-label>
+    <br><br>
     <div *ngIf="addchapter">
-    <div>
-      <label>Insert chapter URL here: </label>
-      <input #box
-      (keyup.enter)="update(box.value)"
-      (blur)="update(box.value)">
-    </div>
-    <div *ngIf="added">
-      <p>{{added | titlecase}}</p>
-    </div>
-    <div>
-      <button (click)="addnewchapter()"><mat-icon>playlist_add</mat-icon>Add</button>
-    </div>
+      <div>
+        <label>Insert chapter URL here: </label>
+        <input #box
+        (keyup.enter)="update(box.value)"
+        (blur)="update(box.value)">
+      </div>
+      <div *ngIf="added">
+        <p>{{added | titlecase}}</p>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="addnewchapter()"><mat-icon>playlist_add</mat-icon>Add</button>
+      </div>
     </div>
     <div *ngIf="!addchapter">
       <button mat-raised-button color="primary" (click)="add()"><mat-icon>playlist_add</mat-icon>Add Chapter</button>
@@ -121,7 +130,7 @@
         <tr *ngFor="let novel of updates; let i=index">
           <!-- <td [ngClass]="{ 'font-size': setting.frontSize ? setting.frontSize : '24px'} "> -->
           <td>
-            <a (click)="updatechapter(novel.url, novel.title)" href="">{{novel.title}}</a>
+            <a (click)="updatechapter(novel.url, novel.title)">{{novel.title}}</a>
             <br>
             <a (click)="updatechapter(novel.url, novel.title)"><img [src]="novel.image" class="image-style"></a>
           </td>

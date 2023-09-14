@@ -91,7 +91,8 @@ public class UserService
         String uuid= s3Repo.saveFile(image);
         String url = "https://somethinguphere.sgp1.digitaloceanspaces.com/"+uuid;
         setting.setImageUrl(url);
-        return userRepository.updateSetting(setting);
+        boolean result = userRepository.updateSetting(setting);
+        return result;
     }
     // public Integer registerUser(User data)
     // {

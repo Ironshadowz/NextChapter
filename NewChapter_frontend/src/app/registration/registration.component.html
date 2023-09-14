@@ -16,6 +16,14 @@
             padding: 10px;
             overflow: auto;
           }
+          .left-aligned-form {
+            text-align: left; /* Set the text alignment of the form to left */
+          }
+          .left-div, .right-div {
+            width: 50%; /* Set both divs to occupy 50% of the container width */
+            float: left; /* Float the divs left to make them side by side */
+            /* Optionally, you can add styles to the divs */
+          }
 </style>
 <div class="container">
   <div *ngIf="errorMsg">
@@ -23,55 +31,46 @@
   </div>
   <form [formGroup]="form">
     <div>
-      <div class="text-violet-900 text-sm font-normal leading-[19px]">Username</div>
+      <mat-label class="mat-h1" style="font-size:20px">Username </mat-label><br>
       <input matInput type="text" formControlName="username">
-      <div *ngIf="form.get('username')?.hasError('required')">
-        Please enter username
-      </div>
+      <mat-error *ngIf="form.controls['username'].errors?.['required']">Name is a required field</mat-error>
     </div>
     <div>
-      <div class="text-violet-900 text-sm font-normal leading-[19px]">Email</div>
+      <mat-label class="mat-h1" style="font-size:20px">Email</mat-label><br>
       <input matInput type="text" formControlName="email">
-      <div *ngIf="form.get('email')?.hasError('required')">
-        Please enter email
-      </div>
-      <div *ngIf="form.get('email')?.hasError('email')">
-        Please enter a proper email
-      </div>
+      <mat-error *ngIf="form.controls['email'].errors?.['required']">Email is a required field</mat-error>
+      <mat-error *ngIf="form.controls['email'].errors?.['email']">Needs a valid email</mat-error>
     </div>
     <div>
-      <div class="text-violet-900 text-sm font-normal leading-[19px]">Password</div>
+      <mat-label class="mat-h1" style="font-size:20px">Password </mat-label><br>
       <input matInput type="password" formControlName="password1" [(ngModel)]="password1">
-      <div *ngIf="form.get('password1')?.hasError('required')">
-        Please enter a password
-      </div>
-      <div *ngIf="form.get('password1')?.hasError('minlength')">
-        Please enter password of minimum 8 character
-      </div>
+      <mat-error *ngIf="form.controls['password1'].errors?.['required']">Password is a required field</mat-error>
+      <mat-error *ngIf="form.controls['password1'].errors?.['minlength']">Minimum length is 8</mat-error>
     </div>
     <div>
-      <div class="text-violet-900 text-sm font-normal leading-[19px]">Password</div>
+      <mat-label class="mat-h1" style="font-size:20px">Password </mat-label><br>
       <input matInput type="password" formControlName="password2" [(ngModel)]="password2" (ngModelChange)="checkSame($event)">
+      <mat-error *ngIf="form.controls['password1'].errors?.['required']">Password is a required field</mat-error>
       <div *ngIf="samepassword">
         <label>{{samepassword}}</label>
       </div>
     </div>
     <div>
-      <div class="text-violet-900 text-sm font-normal leading-[19px]">Country</div>
+      <mat-label class="mat-h1" style="font-size:20px">Country </mat-label><br>
       <input matInput type="text" formControlName="country">
-      <div *ngIf="form.get('country')?.hasError('required')">
-        Please enter a country
-      </div>
+      <mat-error *ngIf="form.controls['country'].errors?.['required']">Country is a required field</mat-error>
     </div>
     <div>
-      <div class="text-violet-900 text-sm font-normal leading-[19px]">City</div>
+      <mat-label class="mat-h1" style="font-size:20px">City </mat-label><br>
       <input matInput type="text" formControlName="city">
-      <div *ngIf="form.get('city')?.hasError('required')">
-        Please enter a city
-      </div>
+      <mat-error *ngIf="form.controls['city'].errors?.['required']">City is a required field</mat-error>
     </div>
-    <div>
-      <button (click)="submit()" [disabled]="!form.valid">Submit</button>
+    <br>
+    <div class="left-div">
+      <button mat-raised-button color="primary" (click)="submit()" [disabled]="!form.valid">Submit</button>
+    </div>
+    <div class="right-div">
+      <button mat-raised-button color="primary" (click)="back()">Back</button>
     </div>
   </form>
 </div>

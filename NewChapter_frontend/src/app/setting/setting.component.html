@@ -43,7 +43,12 @@
           }
 </style>
 <div class="container">
-  <img [src]="this.setting.imageUrl" class="icon">
+  <div *ngIf="setting.imageUrl">
+    <img class="icon" [src]="setting.imageUrl" alt="">
+  </div>
+  <div *ngIf="!setting.imageUrl">
+    <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Fantasy_icon.svg">
+  </div>
   <mat-label class="mat-h2">Welcome <span>{{name | titlecase}}</span></mat-label>
   <br>
   <mat-list class="horizontal-list">
@@ -52,7 +57,7 @@
     <mat-list-item><button mat-raised-button color="primary" (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button></mat-list-item>
   </mat-list>
   <form [formGroup]="form">
-    <div>
+    <!-- <div>
       <mat-label style="font-size:20px">Font Size</mat-label>
       <br>
       <input matInput type="number" formControlName="frontSize" placeholder="14-40">
@@ -65,14 +70,14 @@
       <div *ngIf="form.get('frontSize')?.hasError('max')">
         Cannot be too big
       </div>
-    </div>
+    </div> -->
     <div>
-      <mat-label style="font-size:20px">Weather Effect</mat-label>
+      <mat-radio-group formControlName="weatherEffect">
+        <mat-label style="font-size:20px">Weather Effect</mat-label>
       <br>
-      <input matInput type="text" formControlName="weatherEffect" placeholder="True or False">
-      <div *ngIf="form.get('weatherEffect')?.hasError('required')">
-        Please set weather effect
-      </div>
+      <mat-radio-button value="True">Enable</mat-radio-button>
+      <mat-radio-button value="False">Disable</mat-radio-button>
+      </mat-radio-group>
     </div>
     <br>
     <div>
@@ -82,7 +87,7 @@
     </div>
     <br>
     <div>
-      <button mat-raised-button color="primary" (click)="save()" [disabled]="!form.valid">Save changes</button>
+      <button mat-raised-button color="primary" (click)="save()">Save changes</button>
     </div>
   </form>
 </div>

@@ -56,5 +56,9 @@ export class LoginComponent
   {
     this.router.navigate(['/registration'])
   }
+  ngOnDestroy()
+  {
+    this.sub.unsubscribe()
+  }
 }
 

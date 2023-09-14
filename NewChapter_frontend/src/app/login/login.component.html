@@ -17,6 +17,12 @@
             padding: 10px;
             overflow: auto;
           }
+          img.icon {
+            display:inline;
+            width: 250px; /* Set the width to the desired icon width */
+            height: 250px; /* Set the height to the desired icon height */
+            margin-right: 12px;
+          }
 .left-div, .right-div {
   width: 50%; /* Set both divs to occupy 50% of the container width */
   float: left; /* Float the divs left to make them side by side */
@@ -24,19 +30,20 @@
 }
 </style>
 <div class="container">
+  <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Fantasy_icon.svg">
   <div>
     <form [formGroup]="form" (submit)="submit()">
       <div class="w-[556px] h-[343px] bg-zinc-300">
         <label class="mat-subheading-1" style="font-size:30px">Login</label>
-        <br>
+        <br><br>
         <div>
-          <div style="font-size:20px">Username</div>
+          <div style="font-size:25px">Username</div>
           <input matInput formControlName="username" placeholder="Enter">
           <br>
           <mat-error *ngIf="form.controls['username'].errors?.['required']">Name is a required field</mat-error>
         </div>
         <div class="w-[345px] h-[74px] flex-col justify-end items-start gap-[7px] inline-flex">
-          <div style="font-size:20px">Password</div>
+          <div style="font-size:25px">Password</div>
           <input matInput type="password" formControlName="password" placeholder="Enter">
           <br>
           <mat-error *ngIf="form.controls['password'].errors?.['required']">Password required to login</mat-error>

@@ -58,6 +58,10 @@ export class RegistrationComponent
                   }
                 })
   }
+  back()
+  {
+    this.router.navigate(['/'])
+  }
   checkSame(password: string)
   {
     this.password2 = password;

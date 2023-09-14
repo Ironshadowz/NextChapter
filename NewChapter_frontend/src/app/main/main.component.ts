@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BackendService } from '../backend.service';
@@ -27,13 +27,14 @@ export class MainComponent
   value = ''
   nextchapter!:UpdateChapter
   errorMsg!:string
-  setting :Setting = { name:'', frontsize : 24, weatherEffect : true, weather : 'something', imageUrl:''}
+  setting :Setting = { name:'', frontsize : 24, weatherEffect : false, weather : '', imageUrl:''}
 
   private route = inject(ActivatedRoute)
   private backServ = inject(BackendService)
   private router = inject(Router)
   private locat = inject(Location)
   private auth = inject(HttpService)
+  private renderer = inject(Renderer2)
 
   ngOnInit()
   {
@@ -44,7 +45,6 @@ export class MainComponent
                   next: (result)=>
                   {
                     this.setting=result
-                    document.body.style.fontSize = this.setting.frontsize + 'px';
                     console.log("Getting result "+this.setting.frontsize)
                   },
                   error: (e)=>
@@ -75,6 +75,7 @@ export class MainComponent
   }
   addnewchapter()
   {
+    this.addchapter=false
     console.log('addnewchapter '+this.value)
     this.sub2 = this.auth.request('POST', '/addLink/'+this.name, this.value).subscribe
                 ({
@@ -117,7 +118,9 @@ export class MainComponent
                     this.updatedchapter=result
                     console.log(result)
                     if(result==true)
-                    window.location.href=nextchapter
+                    window.open(nextchapter, '_blank')
+                    //window.location.href=nextchapter
+                    this.ngOnInit()
                   },
                   error: (e)=>
                   {

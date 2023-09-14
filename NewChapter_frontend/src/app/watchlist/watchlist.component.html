@@ -37,15 +37,49 @@
             margin-right: 10px; /* Add space between list items (adjust as needed) */
             /* Additional styling for list items */
           }
+          img.icon {
+            display:inline;
+            width: 50px; /* Set the width to the desired icon width */
+            height: 50px; /* Set the height to the desired icon height */
+            margin-right: 12px;
+          }
 </style>
 <div class="container">
+  <div *ngIf="setting.imageUrl">
+    <img class="icon" [src]="setting.imageUrl" alt="">
+  </div>
+  <div *ngIf="!setting.imageUrl">
+    <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Fantasy_icon.svg">
+  </div>
+  <mat-label class="mat-h2">Welcome <span>{{name | titlecase}}</span></mat-label>
+  <br>
   <mat-list class="horizontal-list">
     <mat-list-item><a routerLink="/main/{{name}}"><mat-icon>star_border</mat-icon>Updates</a></mat-list-item>
     <mat-list-item><a routerLink='/settings/{{name}}'><mat-icon>settings</mat-icon>Setting</a></mat-list-item>
     <mat-list-item><button mat-raised-button color="primary" (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button></mat-list-item>
   </mat-list>
+  <mat-label>Supports chapters from <a href="https://shanghaifantasy.com/" target="_blank">shanghaifantasy</a></mat-label>
+    <br><br>
+    <div *ngIf="addchapter">
+      <div>
+        <label>Insert chapter URL here: </label>
+        <input #box
+        (keyup.enter)="update(box.value)"
+        (blur)="update(box.value)">
+      </div>
+      <br>
+      <div *ngIf="added">
+        <p>{{added | titlecase}}</p>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="addnewchapter()"><mat-icon>playlist_add</mat-icon>Add</button>
+      </div>
+    </div>
+    <div *ngIf="!addchapter">
+      <button mat-raised-button color="primary" (click)="add()"><mat-icon>playlist_add</mat-icon>Add Chapter</button>
+    </div>
 </div>
-
+<div></div>
   <div class="center-horizontally">
     <table class="center">
       <tbody>
@@ -53,9 +87,9 @@
           <td>
             <img [src]="novel.image" class="image-style">
             <br>
-            <mat-label class="mat-h2"> {{novel.title}}</mat-label>
+            <mat-label class="mat-h2">{{novel.title}}</mat-label>
             <br>
-            <button (click)="delete(novel.title)">Remove novel from watch list</button>
+            <button (click)="delete(novel.title)">Remove item from watch list</button>
           </td>
         </tr>
       </tbody>
